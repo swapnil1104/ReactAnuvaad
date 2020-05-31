@@ -12,20 +12,17 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-syntax-highlighter": "^11.0.4",
     "bootstrap": "^4.5.0",
-    "fast-xml-parser": "^3.17.3",
+    "dotenv": "^8.2.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-code-blocks": "0.0.7",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.1",
     "react-dropzone-uploader": "^2.11.0",
-    "react-radio-buttons": "^1.2.2",
     "react-scripts": "3.4.1",
     "react-syntax-highlighter": "^12.2.1",
-    "superagent": "^5.2.2",
     "typescript": "^3.9.3",
-    "xml-js": "^1.6.11",
-    "xml2js": "^0.4.23"
+    "xml-js": "^1.6.11"
   },
   "scripts": {
     "start": "react-scripts start",
