@@ -1,6 +1,4 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-
 
 export interface LanguageProps {
     handler: (languageCode: string) => void,
@@ -11,9 +9,6 @@ export interface LanguageProps {
 }
 
 export default class LanguageButton extends React.PureComponent<LanguageProps> {
-    constructor(props: LanguageProps) {
-        super(props);
-    }
 
     render() {
 

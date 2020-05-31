@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/header/Header';
-import Content from './components/content/Content';
+import ContentComponent from './components/content/ContentComponent';
 import Language from './models/Language';
 
 const languageArray: Language[] = [
@@ -27,8 +27,9 @@ const languageArray: Language[] = [
 function App() {
   return (
     <div className="App">
+      <a className="github-fork-ribbon" href="http://github.com/swapnil1104/ReactAnuvaad" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
       <Header />
-      <Content languageArray={languageArray} />
+      <ContentComponent languageArray={languageArray} />
     </div>
   );
 }

@@ -1,10 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { Button } from 'react-bootstrap';
-import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { json2xml, xml2json } from 'xml-js';
-import LanguageButton from '../LanguageButton';
-import { androidstudio } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import XmlString from '../../models/XmlString';
 import FileUtils from '../utils/FileUtils';
 import StringUtils from '../utils/StringUtils';
@@ -13,6 +10,7 @@ import FileUploadComponent from './FileUploadComponent';
 import CodeBlockComponent from './CodeBlockComponent';
 import LanguageSelectComponent from './LanguageSelectComponent';
 import Language from '../../models/Language';
+import ErrorMsgComponent from './ErrorMsgComponent';
 
 interface ContentProps {
     languageArray: Language[]
@@ -22,10 +20,11 @@ interface ContentState {
     inputText: string,
     translatedText: string,
     language: string,
-    file?: File
+    file?: File,
+    errorMsg?: string | undefined
 }
 
-export default class Content extends React.Component<ContentProps, ContentState> {
+export default class ContentComponent extends React.Component<ContentProps, ContentState> {
 
     private translatedXmlString: XmlString[];
 
@@ -44,6 +43,10 @@ export default class Content extends React.Component<ContentProps, ContentState>
         return (
             <div className="container">
                 <FileUploadComponent onFileSelect={this.onFileInput} />
+
+                <div>
+                    <ErrorMsgComponent errorMsg={this.state.errorMsg} />
+                </div>
 
                 <div className="container pt-md-3 pb-md-3 mx-auto">
                     <div className="row">
@@ -74,7 +77,8 @@ export default class Content extends React.Component<ContentProps, ContentState>
             FileUtils.getFileFromInput(this.state.file).then((binary) => {
                 const jsonObj = JSON.parse(xml2json(binary, { compact: true }));
                 this.setState({
-                    inputText: binary
+                    inputText: binary,
+                    errorMsg: undefined
                 })
 
                 jsonObj.resources.string.forEach((element: XmlString, index: number) => {
@@ -82,16 +86,29 @@ export default class Content extends React.Component<ContentProps, ContentState>
                         const translatedText = LangUtils.translateText(this.state.language, element._text);
                         translatedText.then((value: Response) => {
                             value.json().then(value => {
-                                element._text = value.data.translations[0].translatedText;
-                                this.translatedXmlString.push(element);
+                                if (value.data?.translations[0]) {
 
-                                this.setState({
-                                    translatedText: json2xml(StringUtils.getXmlTree(JSON.stringify(this.translatedXmlString)), { compact: true, spaces: 4 })
-                                });
+
+                                    element._text = value.data.translations[0].translatedText;
+                                    this.translatedXmlString.push(element);
+
+                                    this.setState({
+                                        translatedText: json2xml(StringUtils.getXmlTree(JSON.stringify(this.translatedXmlString)), { compact: true, spaces: 4 })
+                                    });
+                                } else {
+                                    this.setState({
+                                        errorMsg:"Something went wrong, please try again."
+                                    });
+                                    return;
+                                }
                             });
                         });
                     }
                 });
+            });
+        } else {
+            this.setState({
+                errorMsg: "Please select a file"
             });
         }
     }
@@ -104,11 +121,17 @@ export default class Content extends React.Component<ContentProps, ContentState>
             const file: File = event.target.files[0];
 
             FileUtils.getFileFromInput(file).then((binary) => {
-                const jsonObj = JSON.parse(xml2json(binary, { compact: true }));
-                this.setState({
-                    file: file,
-                    inputText: binary
-                });
+                try {
+                    this.setState({
+                        file: file,
+                        inputText: binary
+                    });
+                } catch(err) {
+                    this.setState({
+                        errorMsg: "Please select a valid XML. " + err
+                    })
+                }
+                
             });
         }
     }
