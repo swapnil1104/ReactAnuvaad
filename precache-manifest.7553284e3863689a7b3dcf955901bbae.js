@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "41e6df7124d8ec90080e301baf947340",
+    "revision": "5ab11978bf755696b83cb99a0baefd07",
     "url": "/ReactAnuvaad/index.html"
   },
   {
-    "revision": "409b07066739d43121b1",
-    "url": "/ReactAnuvaad/static/css/main.523f09c5.chunk.css"
+    "revision": "2d4676f03f5675b1aa0e",
+    "url": "/ReactAnuvaad/static/css/main.2ce63322.chunk.css"
   },
   {
     "revision": "036cb925d300b842c5f2",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ReactAnuvaad/static/js/2.39fb1635.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "409b07066739d43121b1",
+    "revision": "2d4676f03f5675b1aa0e",
     "url": "/ReactAnuvaad/static/js/main.b302297f.chunk.js"
   },
   {
