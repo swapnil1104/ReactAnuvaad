@@ -1,10 +1,6 @@
 import Attributes from './Attributes';
 
-interface XmlString {
+export default interface XmlString {
     _attributes: Attributes,
     _text: string
 }
-
-
-
-export default XmlString;

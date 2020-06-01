@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/header/Header';
 import ContentComponent from './components/content/ContentComponent';
@@ -24,10 +23,11 @@ const languageArray: Language[] = [
   },
 ]
 
-function App() {
+function App(): JSX.Element {
   return (
     <div className="App">
-      <a className="github-fork-ribbon" href="http://github.com/swapnil1104/ReactAnuvaad" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+      <script data-ad-client={process.env.ADSENSE_PUB_ID} async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <a className="github-fork-ribbon" href="http://github.com/swapnil1104/ReactAnuvaad" data-ribbon="Star on GitHub" title="Star on GitHub">Star on GitHub</a>
       <Header />
       <ContentComponent languageArray={languageArray} />
     </div>

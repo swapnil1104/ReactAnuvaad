@@ -81,7 +81,7 @@ export default class ContentComponent extends React.Component<ContentProps, Cont
                     errorMsg: undefined
                 })
 
-                jsonObj.resources.string.forEach((element: XmlString, index: number) => {
+                jsonObj.resources.string.forEach((element: XmlString) => {
                     if (!element._attributes.translatable) {
                         const translatedText = LangUtils.translateText(this.state.language, element._text);
                         translatedText.then((value: Response) => {
