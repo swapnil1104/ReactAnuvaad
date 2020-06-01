@@ -2,8 +2,12 @@
 An open source tool that you can use to localize your Android Apps!
 It supports majority of global languages: Hindi, Spanish, Chinese, Arabic and Russian. I plan to add more as the community requires.
 
+Can't wait to translate your app?
+use it now @ [ReactAnuvaad](https://swapnil1104.github.io/ReactAnuvaad)
+
 #### You can translate your entire strings.xml file into any of these languages within few seconds.
 
+![Demo](documentation/demo/demo.gif)
 
 ## Available Scripts
 
