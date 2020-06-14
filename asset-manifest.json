@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/ReactAnuvaad/static/css/main.2ce63322.chunk.css",
-    "main.js": "/ReactAnuvaad/static/js/main.38f55116.chunk.js",
-    "main.js.map": "/ReactAnuvaad/static/js/main.38f55116.chunk.js.map",
+    "main.js": "/ReactAnuvaad/static/js/main.cc5bdc1a.chunk.js",
+    "main.js.map": "/ReactAnuvaad/static/js/main.cc5bdc1a.chunk.js.map",
     "runtime-main.js": "/ReactAnuvaad/static/js/runtime-main.f121fb64.js",
     "runtime-main.js.map": "/ReactAnuvaad/static/js/runtime-main.f121fb64.js.map",
-    "static/js/2.eb77c4b5.chunk.js": "/ReactAnuvaad/static/js/2.eb77c4b5.chunk.js",
-    "static/js/2.eb77c4b5.chunk.js.map": "/ReactAnuvaad/static/js/2.eb77c4b5.chunk.js.map",
+    "static/js/2.a7022594.chunk.js": "/ReactAnuvaad/static/js/2.a7022594.chunk.js",
+    "static/js/2.a7022594.chunk.js.map": "/ReactAnuvaad/static/js/2.a7022594.chunk.js.map",
     "index.html": "/ReactAnuvaad/index.html",
-    "precache-manifest.efe7bceec699816fd48cfcdf366cdb45.js": "/ReactAnuvaad/precache-manifest.efe7bceec699816fd48cfcdf366cdb45.js",
+    "precache-manifest.cd277025dafab9177c46849326ea4bfc.js": "/ReactAnuvaad/precache-manifest.cd277025dafab9177c46849326ea4bfc.js",
     "service-worker.js": "/ReactAnuvaad/service-worker.js",
     "static/css/main.2ce63322.chunk.css.map": "/ReactAnuvaad/static/css/main.2ce63322.chunk.css.map",
-    "static/js/2.eb77c4b5.chunk.js.LICENSE.txt": "/ReactAnuvaad/static/js/2.eb77c4b5.chunk.js.LICENSE.txt"
+    "static/js/2.a7022594.chunk.js.LICENSE.txt": "/ReactAnuvaad/static/js/2.a7022594.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f121fb64.js",
-    "static/js/2.eb77c4b5.chunk.js",
+    "static/js/2.a7022594.chunk.js",
     "static/css/main.2ce63322.chunk.css",
-    "static/js/main.38f55116.chunk.js"
+    "static/js/main.cc5bdc1a.chunk.js"
   ]
 }
