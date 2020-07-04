@@ -21,12 +21,15 @@ interface ContentState {
     translatedText: string,
     language: string,
     file?: File,
-    errorMsg?: string | undefined
+    errorMsg?: string | undefined,
+    translationComplete: boolean,
+    translationProgress?: number
 }
 
 export default class ContentComponent extends React.Component<ContentProps, ContentState> {
 
     private translatedXmlString: XmlString[];
+    private translatedString: string;
 
     constructor(props: ContentProps) {
         super(props);
@@ -34,12 +37,18 @@ export default class ContentComponent extends React.Component<ContentProps, Cont
             inputText: "Select your Strings.xml file from resources",
             translatedText: "Hit 'Translate' to start",
             language: "es",
-
+            translationComplete: false
         };
         this.translatedXmlString = [];
+        this.translatedString ="";
     }
 
-    render() {
+    render(): JSX.Element {
+        let file;
+        if (this.state.translationComplete) {
+            file = new Blob([this.state.translatedText], { type: 'text/xml' });
+        }
+
         return (
             <div className="container">
                 <FileUploadComponent onFileSelect={this.onFileInput} />
@@ -48,15 +57,21 @@ export default class ContentComponent extends React.Component<ContentProps, Cont
                     <ErrorMsgComponent errorMsg={this.state.errorMsg} />
                 </div>
 
+                {this.state.translationComplete &&
+                    <div className="alert alert-success alert">
+                        String.xml generated successfully. <a href={URL.createObjectURL(file)} download="strings.xml" >Download </a>
+                    </div>
+                }
+
                 <div className="container pt-md-3 pb-md-3 mx-auto">
                     <div className="row">
                         <CodeBlockComponent code={this.state.inputText} />
-                        <CodeBlockComponent code={this.state.translatedText} />
+                        <CodeBlockComponent code={this.state.translatedText} progress={this.state.translationProgress} />
                     </div>
                 </div>
                 <LanguageSelectComponent
                     selectedLanguageCode={this.state.language}
-                    languageArry={this.props.languageArray}
+                    languageArray={this.props.languageArray}
                     selectLanguageHandler={this.onLanguageChange} />
 
                 <div className="row pt-md-4">
@@ -70,7 +85,7 @@ export default class ContentComponent extends React.Component<ContentProps, Cont
         this.setState({ language: language });
     }
 
-    private startTranslation = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    private startTranslation = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
 
         if (this.state.file) {
             this.translatedXmlString = [];
@@ -78,8 +93,12 @@ export default class ContentComponent extends React.Component<ContentProps, Cont
                 const jsonObj = JSON.parse(xml2json(binary, { compact: true }));
                 this.setState({
                     inputText: binary,
-                    errorMsg: undefined
+                    errorMsg: undefined,
+                    translatedText: ".....",
+                    translationProgress: undefined
                 })
+
+                const arrSize = jsonObj.resources.string.length;
 
                 jsonObj.resources.string.forEach((element: XmlString) => {
                     if (!element._attributes.translatable) {
@@ -87,22 +106,31 @@ export default class ContentComponent extends React.Component<ContentProps, Cont
                         translatedText.then((value: Response) => {
                             value.json().then(value => {
                                 if (value.data?.translations[0]) {
-
-
                                     element._text = value.data.translations[0].translatedText;
                                     this.translatedXmlString.push(element);
-
-                                    this.setState({
-                                        translatedText: json2xml(StringUtils.getXmlTree(JSON.stringify(this.translatedXmlString)), { compact: true, spaces: 4 })
-                                    });
+                                    this.translatedString = json2xml(StringUtils.getXmlTree(JSON.stringify(this.translatedXmlString)), { compact: true, spaces: 4 });
+                                    if (this.translatedXmlString.length === arrSize - 2) {
+                                        this.setState({
+                                            translatedText: this.translatedString,
+                                            translationComplete: true
+                                        })
+                                    } else {
+                                        const percent = (this.translatedXmlString.length / arrSize * 100);
+                                        
+                                        this.setState({
+                                            translationProgress: percent
+                                        });
+                                    }
                                 } else {
                                     this.setState({
-                                        errorMsg:"Something went wrong, please try again."
+                                        errorMsg: "Something went wrong, please try again."
                                     });
                                     return;
                                 }
                             });
                         });
+                    } else {
+                        this.translatedXmlString.push(element);
                     }
                 });
             });
@@ -126,12 +154,12 @@ export default class ContentComponent extends React.Component<ContentProps, Cont
                         file: file,
                         inputText: binary
                     });
-                } catch(err) {
+                } catch (err) {
                     this.setState({
                         errorMsg: "Please select a valid XML. " + err
                     })
                 }
-                
+
             });
         }
     }

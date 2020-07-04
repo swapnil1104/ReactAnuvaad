@@ -20,13 +20,20 @@ const languageArray: Language[] = [
   }, {
     name: 'Russian (русский язык)',
     code: 'ru'
-  },
+  }, {
+    name: 'German (Deutsch)',
+    code: 'de'
+  }, {
+    name: 'Portugese (português)',
+    code: 'pt'
+  }
 ]
 
 function App(): JSX.Element {
+  const adId = process.env.ADSENSE_PUD_ID;
   return (
     <div className="App">
-      <script data-ad-client={process.env.ADSENSE_PUB_ID} async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script data-ad-client={adId} async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <a className="github-fork-ribbon" href="http://github.com/swapnil1104/ReactAnuvaad" data-ribbon="Star on GitHub" title="Star on GitHub">Star on GitHub</a>
       <Header />
       <ContentComponent languageArray={languageArray} />

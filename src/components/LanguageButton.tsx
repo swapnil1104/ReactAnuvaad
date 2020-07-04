@@ -10,7 +10,7 @@ export interface LanguageProps {
 
 export default class LanguageButton extends React.PureComponent<LanguageProps> {
 
-    render() {
+    render(): JSX.Element {
 
         let className = "btn btn-link col-sm";
         if (this.props.isSelected) {
