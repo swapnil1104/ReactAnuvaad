@@ -9,7 +9,25 @@ use it now @ [www.androidapptranslator.com](https://androidapptranslator.com)
 
 ![Demo](documentation/demo/demo.gif)
 
-## Available Scripts
+
+## Up an running locally
+
+### Generating Google Cloud Translation API Key
+To get ReactAnuvaad up and running locally, you'll need to create and add a Google API key to enable usage of cloud translation API.
+Follow this guide to create a new Google Cloud project and creating an auth API key
+https://cloud.google.com/translate/docs/basic/setup-basic
+
+### Using the API key in ReactAnuvaad
+ - Create a new file named `.env` in the project root.
+ - Create a new variable containing the API key
+    ```
+    REACT_APP_LANG_TRANSLATION_API_KEY=<your_generated_api_key>
+    ```
+ - Use the created variable in [LangUtils.ts](https://github.com/swapnil1104/ReactAnuvaad/blob/master/src/components/utils/LangUtils.ts) file.
+
+After this, ReactAnuvaad is ready to run locally using the following steps:
+
+### Available Scripts
 
 In the project directory, you can run:
 
@@ -17,13 +35,3 @@ In the project directory, you can run:
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
